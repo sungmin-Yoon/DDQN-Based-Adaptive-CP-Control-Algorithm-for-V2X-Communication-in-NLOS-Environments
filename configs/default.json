@@ -1,0 +1,113 @@
+{
+  "experiment": {
+    "name": "cv2x_mode4_incremental_ddqn_adaptive_cp_v5_rule_rho4",
+    "training_seeds": [20260715, 20260716, 20260717, 20260718, 20260719],
+    "validation_seed": 31000000,
+    "test_seed": 41000000,
+    "train_episodes": 1200,
+    "validation_episodes": 20,
+    "validation_interval": 100,
+    "test_episodes": 200,
+    "episode_steps": 200,
+    "control_interval_ms": 100.0,
+    "packet_interval_ms": 10.0,
+    "urban_canyon_start_s": 4.0,
+    "urban_canyon_end_s": 16.0,
+    "deterministic_torch": true
+  },
+  "radio": {
+    "carrier_hz": 5900000000.0,
+    "bandwidth_hz": 10000000.0,
+    "sample_rate_hz": 15360000.0,
+    "fft_size": 1024,
+    "subcarrier_spacing_hz": 15000.0,
+    "occupied_subcarriers": 120,
+    "modulation": "QPSK",
+    "code_rate": 0.5,
+    "tx_power_dbm": 23.0,
+    "noise_figure_db": 9.0,
+    "packet_bits": 2400,
+    "distance_m": 20.0,
+    "speed_kmh": 60.0
+  },
+  "channel": {
+    "shadow_correlation": 0.95,
+    "ds_correlation": 0.96,
+    "estimate_correlation": 0.85,
+    "ds_estimation_log_std": 0.12,
+    "los_shadow_std_db": 3.0,
+    "nlos_shadow_std_db": 4.0,
+    "interference_mean_dbm": -96.0,
+    "interference_std_db": 3.0,
+    "interference_correlation": 0.90,
+    "max_channel_samples": 384,
+    "urban_canyon_ds_multiplier": 2.75,
+    "urban_canyon_late_tap_fraction": 0.08,
+    "urban_canyon_late_tap_delay_samples": 110,
+    "urban_canyon_extra_loss_db": 0.0
+  },
+  "cp": {
+    "fixed_first_samples": 80,
+    "fixed_other_samples": 72,
+    "initial_samples": 72,
+    "min_samples": 8,
+    "max_samples": 180,
+    "delta_min_samples": 1,
+    "delta_max_samples": 24,
+    "delta_gain": 0.50,
+    "target_rho": 3.0,
+    "sweep_step_samples": 4,
+    "rule_rho": 4.0,
+    "rule_rho_sensitivity": [3.0, 4.0]
+  },
+  "phy": {
+    "target_prr": 0.90,
+    "reliability_tolerance": 0.01,
+    "calibration_snapshots": 100,
+    "validation_snapshots": 100,
+    "waveform_blocks": 32
+  },
+  "reward": {
+    "offset": 4.0,
+    "reliability_weight": 28.0,
+    "avoidable_outage_weight": 12.0,
+    "cp_overhead_weight": 1.8,
+    "switch_weight": 0.05,
+    "boundary_weight": 0.20,
+    "target_prr_weight": 2.5,
+    "overprovision_weight": 5.0,
+    "wrong_direction_weight": 2.0,
+    "los_overprovision_multiplier": 2.0,
+    "positive_prr_weight": 4.0,
+    "useful_efficiency_weight": 3.0,
+    "urban_target_boost": 1.35
+  },
+  "ddqn": {
+    "hidden_sizes": [128, 128],
+    "learning_rate": 0.0005,
+    "gamma": 0.99,
+    "batch_size": 128,
+    "replay_capacity": 100000,
+    "warmup_steps": 2000,
+    "target_update_steps": 500,
+    "epsilon_start": 1.0,
+    "epsilon_end": 0.02,
+    "epsilon_decay_steps": 90000,
+    "gradient_clip_norm": 5.0
+  },
+  "gates": {
+    "min_nlos_to_los_ds_ratio": 2.00,
+    "min_stress_to_los_ds_ratio": 2.00,
+    "max_prr_mae": 0.18,
+    "min_action_ranking_agreement": 0.70,
+    "min_cp_sensitive_fraction": 0.10,
+    "max_oracle_action_share": 0.90,
+    "min_oracle_stress_minus_los_cp_samples": 20.0
+  },
+  "statistics": {
+    "bootstrap_samples": 10000,
+    "confidence_level": 0.95,
+    "prr_noninferiority_margin": 0.02,
+    "multiple_testing": "Holm"
+  }
+}
